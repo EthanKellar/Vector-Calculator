@@ -48,7 +48,7 @@ namespace Vector_Calculator
             return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
         }
 
-        public static Vector Scale(Vector v, float scaler)
+        public static Vector Scale(Vector v, double scaler)
         {
             return new Vector(v.x * scaler, v.y * scaler, v.z * scaler);
         }
@@ -69,14 +69,16 @@ namespace Vector_Calculator
             return new Vector((v1.y * v2.z) - (v1.z * v2.y) , (v1.z * v2.x) - (v1.x * v2.z) , (v1.x * v2.y) - (v1.y * v2.x));
         }
 
-        public static Double AngleBetween(Vector v1, Vector v2)
+        public static double AngleBetween(Vector v1, Vector v2)
         {
             return Math.Acos(Vector.DotProduct(v1 , v2) / (v1.GetMagnitude() * v2.GetMagnitude()));
         }
 
         public static Vector ProjectOnto(Vector v1, Vector v2)
         {
-            return new Vector(Vector.DotProduct(v1, v2) / Math.Pow(v2.GetMagnitude(), 2) * v2.x, v2.y, v2.z);
+           
+            double newScale = Vector.DotProduct(v1, v2) / (Math.Pow(v2.GetMagnitude(), 2));
+            return Vector.Scale(v2, newScale);
         }
     }
 }
